@@ -1,11 +1,10 @@
 from django.contrib import admin
-from django.urls import path
-from django.http import HttpResponse
+from django.urls import path, include
 
-def home(request):
-    return HttpResponse("<h1>Welcome to My Django Project 🚀</h1>")
+
+
 
 urlpatterns = [
-    path('', home),  # 👈 this handles the empty path
+    path('', include("MyApp.urls")),  # 👈 this handles the empty path
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Student Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eef3f7;
+        margin: 0;
+        padding: 2em;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .top-bar {
+        text-align: center;
+        margin-bottom: 2em;
+      }
+
+      .top-bar a {
+        text-decoration: none;
+        color: white;
+        background-color: #007BFF;
+        padding: 10px 16px;
+        border-radius: 6px;
+      }
+
+      .top-bar a:hover {
+        background-color: #0056b3;
+      }
+
+      table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007BFF;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .btn {
+        padding: 6px 12px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+        font-size: 0.9em;
+      }
+
+      .edit-btn {
+        background-color: #ffc107;
+      }
+
+      .edit-btn:hover {
+        background-color: #e0a800;
+      }
+
+      .delete-btn {
+        background-color: #dc3545;
+      }
+
+      .delete-btn:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎓 Student Management Dashboard</h1>
+
+    <div class="top-bar">
+      <a href="{% url 'student-add' %}">➕ Add New Student</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for st in students %}
+        <tr>
+          <td>{{ st.id }}</td>
+          <td>{{ st.name }}</td>
+          <td>{{ st.age }}</td>
+          <td>
+            <a href="{% url 'student-update' st.id %}" class="btn edit-btn">✏️ Edit</a>
+            <a href="{% url 'student-delete' st.id %}" class="btn delete-btn">🗑️ Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4">No students found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

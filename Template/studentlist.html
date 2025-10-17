@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Student List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 2em;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      a.add-btn {
+        display: inline-block;
+        margin: 1em 0;
+        padding: 10px 16px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+      }
+
+      a.add-btn:hover {
+        background-color: #45a049;
+      }
+
+      table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007BFF;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .edit-btn {
+        background-color: #ffc107;
+      }
+
+      .edit-btn:hover {
+        background-color: #e0a800;
+      }
+
+      .delete-btn {
+        background-color: #dc3545;
+      }
+
+      .delete-btn:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎓 Student To-Do List</h1>
+
+    <div style="text-align: center;">
+      <a href="{% url 'student-add' %}" class="add-btn"> Add New Student</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for st in students %}
+        <tr>
+          <td>{{ st.id }}</td>
+          <td>{{ st.name }}</td>
+          <td>{{ st.age }}</td>
+          <td>
+            <a href="{% url 'student-update' st.id %}" class="btn edit-btn"> Edit</a>
+            <a href="{% url 'student-delete' st.id %}" class="btn delete-btn"> Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4">No students found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
